@@ -4,16 +4,19 @@
 
 [index.html](index.html) is the whole page: plain HTML, CSS and JavaScript, with a pinned Supabase browser client. It starts with measured weight and grows as you add readings. No framework or build step.
 
-## First: log weight
+## First: deploy BODY
+
+Already created your database and login? Start at step 4.
 
 1. Create a Supabase project; leave the optional GitHub repository blank.
 2. Run [setup.sql](setup.sql) in SQL Editor once. Set your timezone first. If you already ran the original Wire table SQL, keep it and skip this step.
 3. In Authentication → Users, create and confirm your personal user.
-4. Host this repo as a static site. On Vercel: framework **Other**, no build command, project root as the output. No environment variables needed.
-5. Open the page and connect with your project URL, **publishable key** (`sb_publishable_…`), and that user's email/password.
-6. Log your measured weight, choose **kg** or **lbs**, and confirm when you measured it. Save, then refresh: the same reading should remain on the graph and in its history.
+4. **[Deploy your own BODY page](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRowanThistlebrooke%2Fwire-starter&env=SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY&project-name=body&repository-name=wire-starter)**. Choose your GitHub account to create your own copy of this repository.
+5. On Vercel's configuration screen, set `SUPABASE_URL` to your project URL and `SUPABASE_PUBLISHABLE_KEY` to its **publishable key** (`sb_publishable_…`). Find both in your Supabase project's **Connect** dialog. Use framework **Other**, no build command, and the project root as output.
+6. Select **Deploy**, open your new page, and sign in with the email/password from step 3.
+7. Log your measured weight, choose **kg** or **lbs**, and confirm when you measured it. Save, then refresh: the same reading should remain on the graph and in its history.
 
-The database password is not your login password. Project settings stay in this browser; the signed-in session stays in this tab. This repo contains no personal project address, credentials or readings.
+Project settings are configured once on Vercel. The page gets only the public URL and publishable key from `/api/config`; visitors just sign in. Never use a secret or service-role key. The browser sends the login directly to Supabase, and the signed-in session stays in this tab. The database password is not your login password.
 
 ## Optional: progress photos
 
@@ -72,7 +75,7 @@ grant select, insert on public.events to authenticated;
 
 Keep row-level security enabled. Only a publishable key belongs in this page; never use a secret or service-role key.
 
-Local preview: run `python3 -m http.server 8796 --bind 127.0.0.1` in this folder and open `http://localhost:8796`. Use HTTP/HTTPS, not a directly opened file.
+Local preview (Node.js 22+): copy `.env.example` to `.env.local`, fill in the two public settings, then run `node --env-file=.env.local dev.js` and open `http://localhost:8797`. The preview serves the page and `/api/config`; an ordinary static file server cannot provide the connection settings. `.env.local` is ignored by Git.
 
 ## Film this
 

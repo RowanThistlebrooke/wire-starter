@@ -17,14 +17,14 @@
 <body>
 <noscript>This page needs JavaScript to connect to your database.</noscript>
 <div class="wrap">
-<header><div class="brand" aria-label="YOU">YOU<span>.</span></div><div class="header-right"><span class="status" id="connection-status">Your record</span><button class="quiet-button" id="connect-open" type="button">Connect ↗</button><button class="quiet-button" id="log-open" type="button" hidden>Log weight +</button><button class="text-button" id="sign-out" type="button" hidden>Sign out</button></div></header>
+<header><div class="brand" aria-label="YOU">YOU<span>.</span></div><div class="header-right"><span class="status" id="connection-status">Your record</span><button class="quiet-button" id="connect-open" type="button">Sign in ↗</button><button class="quiet-button" id="log-open" type="button" hidden>Log weight +</button><button class="text-button" id="sign-out" type="button" hidden>Sign out</button></div></header>
 <main>
 <section class="hero" aria-label="Body history">
 <div class="hero-top"><div><span class="eyebrow">YOUR WIRE</span><h1>BODY.</h1></div><div class="latest-block"><p class="point-metric" id="point-metric">Weight</p><div class="latest"><strong id="point-value">—</strong><span id="point-unit"></span></div><p class="latest-time" id="point-time">Your next reading starts here.</p></div></div>
 <div class="chart-area"><div class="chart-empty" id="chart-empty"><svg class="empty-mark" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="31" fill="none" stroke="#365147" stroke-dasharray="2 6"/><circle cx="36" cy="36" r="12" fill="#89ebcb08" stroke="#466757"/><circle cx="36" cy="36" r="3" fill="#89ebcb"/></svg><h2 id="empty-title">One reading starts your line.</h2><p id="empty-copy">Log your weight. Each check-in adds a point here.</p></div><div id="chart-data" hidden><svg id="plot" class="plot" viewBox="0 0 700 300" tabindex="0" role="img" aria-label="Recorded values over time. Use the left and right arrow keys to inspect readings."></svg></div></div>
 <div class="chart-toolbar"><p id="history-subtitle">Weight over time · recorded values</p><label id="history-picker" hidden><select id="history-select" aria-label="Measurement to display"></select></label></div>
 </section>
-<section aria-labelledby="readings-title"><div class="section-head"><div class="left"><h2 id="readings-title">Behind the graph</h2><span id="record-count">Your readings</span></div></div><div class="records" id="records"><p class="record-empty">Connect your database to see your readings.</p></div><p class="message" id="history-message" role="status" aria-live="polite"></p><button type="button" class="quiet-button" id="retry-read" hidden>Retry loading</button></section>
+<section aria-labelledby="readings-title"><div class="section-head"><div class="left"><h2 id="readings-title">Behind the graph</h2><span id="record-count">Your readings</span></div></div><div class="records" id="records"><p class="record-empty">Sign in to see your readings.</p></div><p class="message" id="history-message" role="status" aria-live="polite"></p><button type="button" class="quiet-button" id="retry-read" hidden>Retry loading</button></section>
 <section class="photos-section" aria-labelledby="photos-title"><div class="section-head"><div class="left"><h2 id="photos-title">Progress photos</h2><span id="photo-count">Optional</span></div><button class="text-button" id="photo-open" type="button">Add photo +</button></div><div class="photos" id="photos"><p class="photo-empty">A visual record, whenever you want to add one.</p></div></section>
 </main>
 <footer class="footer"><span>Every check-in adds to the same record.</span><a href="https://github.com/RowanThistlebrooke/wire-starter" target="_blank" rel="noopener noreferrer">The Wire · Episode 01 ↗</a></footer>
@@ -33,10 +33,9 @@
 <div class="number-fields"><label class="field"><span>Weight</span><input id="value" type="text" inputmode="decimal" placeholder="—" autocomplete="off" required maxlength="100"></label><label class="field"><span>Unit</span><select id="unit" required><option value="">Choose</option><option value="kg">kg</option><option value="lbs">lbs</option></select></label></div>
 <label class="field"><span>When you weighed in</span><input id="occurred" type="datetime-local" required></label><button class="primary" id="save" type="submit">Save weight ↗</button></fieldset><p class="entry-note" id="entry-note">Your measured weight. Saved to your database.</p><p class="message" id="save-message" role="status" aria-live="polite"></p></form></dialog>
 <dialog id="photo-dialog" aria-labelledby="photo-title"><div class="modal-head"><h2 id="photo-title">Add a progress photo.</h2><button class="close" id="photo-close" type="button" aria-label="Close photo form">×</button></div><form class="photo-form" id="photo-form"><fieldset id="photo-fields"><label class="field"><span>Photo</span><input id="photo-file" type="file" accept="image/jpeg,image/png,image/webp" required><p class="file-note">JPG, PNG or WebP · up to 6 MB</p></label><img id="photo-preview" class="photo-preview" alt="Photo you selected to upload" hidden><label class="field"><span>When it was taken</span><input id="photo-occurred" type="datetime-local" required></label><button class="primary" type="submit">Save photo ↗</button></fieldset><p class="form-footnote">Stored privately in your database’s photo storage. Photos don’t change your weight graph.</p><p class="message" id="photo-message" role="status" aria-live="polite"></p></form></dialog>
-<dialog id="connection-dialog" aria-labelledby="connect-title"><div class="modal-head"><h2 id="connect-title">Connect your Wire.</h2><button class="close" id="connect-close" type="button" aria-label="Close connection settings">×</button></div><p class="modal-copy">Use the Supabase project and the login you just created.</p>
+<dialog id="connection-dialog" aria-labelledby="connect-title"><div class="modal-head"><h2 id="connect-title">Sign in.</h2><button class="close" id="connect-close" type="button" aria-label="Close sign-in">×</button></div><p class="modal-copy">Your readings, in your database.</p>
 <form id="connect-form">
-<details class="project-settings" id="project-settings" open><summary id="project-summary">Your database</summary><div class="project-fields"><label class="field"><span>Project URL</span><input id="project-url" type="url" placeholder="https://your-project.supabase.co" autocomplete="off" required></label><label class="field"><span>Publishable key</span><input id="project-key" type="text" placeholder="sb_publishable_…" autocomplete="off" spellcheck="false" required></label><p class="form-footnote">From your Supabase project’s Connect dialog. Use the publishable key; never a secret or service-role key.</p></div></details>
-<label class="field"><span>Email</span><input id="email" type="email" autocomplete="username" required></label><label class="field"><span>Wire password</span><input id="password" type="password" autocomplete="current-password" required></label><p class="auth-caption">The login from Authentication → Users.</p><button class="primary" id="connect-submit" type="submit">Connect & sign in ↗</button><p class="message" id="connect-message" role="status"></p><p class="form-footnote">The project settings stay in this browser. Your password is sent to your Supabase project and is never saved by this page.</p>
+<label class="field"><span>Email</span><input id="email" type="email" autocomplete="username" required></label><label class="field"><span>Password</span><input id="password" type="password" autocomplete="current-password" required></label><p class="auth-caption">Use the login you created in Supabase → Authentication → Users.</p><button class="primary" id="connect-submit" type="submit">Sign in ↗</button><p class="message" id="connect-message" role="status"></p>
 </form></dialog>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
 <script>
@@ -44,7 +43,6 @@
 'use strict';
 // One HTML page. Supabase stores the record; this browser only displays it.
 const $ = id => document.getElementById(id);
-const CONFIG_KEY = 'wire-starter.project.v1';
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const displayName = value => value.replace(/_/g,' ');
 const stamp = value => new Date(value).toLocaleString([], {month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
@@ -55,17 +53,32 @@ let intent=new URLSearchParams(location.search).get('log')==='weight'?'weight':'
 const photoUrls=new Map();
 let photoRevision=0,historyLoading=0,historySignature='';
 let client = null, authSubscription = null, user = null, rows = [], groups = new Map(), selected = '', generation = 0, request = 0, busy = false, pending = null, plotPoints = [], activePoint = -1;
+let connectionPromise = null;
 function message(id,text,kind=''){ $(id).textContent = text; $(id).className = 'message' + (kind ? ' '+kind : ''); }
 function localNow(){ const date = new Date(); return new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,16); }
 $('occurred').value = localNow();
 $('photo-occurred').value=localNow();
-function projectConfig(){
-  const url = $('project-url').value.trim().replace(/\/$/,''), key = $('project-key').value.trim();
-  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)) throw new Error('Use your Supabase project URL: https://your-project.supabase.co');
-  if (!/^sb_publishable_[A-Za-z0-9_-]+$/.test(key)) throw new Error('Use a publishable key beginning sb_publishable_. Secret and service-role keys cannot go in this page.');
+function projectConfig(value){
+  const url = typeof value?.url==='string'?value.url.trim().replace(/\/$/,''):'', key = typeof value?.key==='string'?value.key.trim():'';
+  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url) || !/^sb_publishable_[A-Za-z0-9_-]+$/.test(key)) throw new Error('This BODY page needs its Supabase connection set up in Vercel.');
   return {url,key};
 }
-function showConnection(){ $('connection-dialog').showModal(); if (!$('project-url').value) $('project-url').focus(); else $('email').focus(); }
+async function connectDatabase(){
+  if(client)return client;
+  if(connectionPromise)return connectionPromise;
+  connectionPromise=(async()=>{
+    let response;
+    try{ response=await fetch('/api/config',{cache:'no-store'}); }
+    catch{ throw new Error('Could not connect to BODY. Check your internet connection and try signing in again.'); }
+    if(!response.ok)throw new Error('This BODY page needs its Supabase connection set up in Vercel.');
+    let config;
+    try{ config=projectConfig(await response.json()); }
+    catch{ throw new Error('This BODY page needs its Supabase connection set up in Vercel.'); }
+    return makeClient(config);
+  })();
+  try{return await connectionPromise;}finally{connectionPromise=null;}
+}
+function showConnection(){ $('connection-dialog').showModal(); $('email').focus(); }
 $('connect-open').onclick = showConnection;
 $('connect-close').onclick = () => { if(!busy)$('connection-dialog').close(); };
 function resetView(){
@@ -74,7 +87,7 @@ function resetView(){
   $('empty-title').textContent='One reading starts your line.';
   $('empty-copy').textContent='Log your weight. Each check-in adds a point here.';
   $('point-metric').textContent='Weight'; $('point-value').textContent='—'; $('point-unit').textContent=''; $('point-time').textContent='Your next reading starts here.';
-  $('records').innerHTML='<p class="record-empty">Connect your database to see your readings.</p>';
+  $('records').innerHTML='<p class="record-empty">Sign in to see your readings.</p>';
   $('record-count').textContent='Your readings';
   $('history-subtitle').textContent='Weight over time · recorded values'; $('retry-read').hidden=true;
   clearPhotos(); message('history-message','');
@@ -117,17 +130,15 @@ function makeClient(config){
 }
 $('connect-form').addEventListener('submit',async event => {
   event.preventDefault(); if (busy) return;
-  let config; try { config=projectConfig(); } catch(error){ $('project-settings').open=true; message('connect-message',error.message,'error'); return; }
   busy=true; $('connect-submit').disabled=true; message('connect-message','Signing in…');
   try {
-    const db=makeClient(config);
+    const db=await connectDatabase(); message('history-message','');
     const {data,error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
     if (error) throw error;
     if (!data.user) throw new Error('Sign-in did not return a user. Please try again.');
-    try { localStorage.setItem(CONFIG_KEY,JSON.stringify(config)); } catch {}
-    $('password').value=''; $('project-summary').textContent=new URL(config.url).hostname; $('project-settings').open=false;
+    $('password').value='';
     setUser(data.user); $('connection-dialog').close(); message('connect-message',''); finishIntent();
-  } catch(error){ message('connect-message',error.message || 'Could not sign in. Check the project and your Wire login.','error'); }
+  } catch(error){ message('connect-message',error.message || 'Could not sign in. Check your email and password.','error'); }
   finally { busy=false; $('connect-submit').disabled=false; }
 });
 $('sign-out').onclick=async () => {
@@ -401,16 +412,13 @@ window.addEventListener('focus',refreshWhenVisible);
 document.addEventListener('visibilitychange',refreshWhenVisible);
 setInterval(refreshWhenVisible,30000);
 
-// Restore only public project settings and a session for this browser tab.
+// Deployment provides public settings; restore only this tab's signed-in session.
 (async()=>{
   try{
-    const saved=JSON.parse(localStorage.getItem(CONFIG_KEY) || 'null');if(!saved)return;
-    $('project-url').value=saved.url || ''; $('project-key').value=saved.key || '';
-    const config=projectConfig(),db=makeClient(config);
-    $('project-summary').textContent=new URL(config.url).hostname;$('project-settings').open=false;
+    const db=await connectDatabase(),version=generation;
     const {data,error}=await db.auth.getSession();if(error)throw error;
-    if(client===db)setUser(data.session?.user || null);
-  }catch{message('history-message','Reconnect your Wire to continue.');}
+    if(client===db && version===generation)setUser(data.session?.user || null);
+  }catch(error){message('history-message',error.message || 'Sign in to open your Wire.','error');}
   finally{ if(intent && !user)showConnection(); }
 })();
 

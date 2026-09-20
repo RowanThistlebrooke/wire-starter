@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080c0d">
+<title>Your Wire</title>
+<style>
+:root{color-scheme:dark;--bg:#080c0d;--panel:#101718;--ink:#edf4f1;--dim:#a2b5b1;--edge:#263532;--mint:#89ebcb;--blue:#a6caff;--error:#ffae9f;--sans:Inter,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans);font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}body:before{content:"";position:absolute;inset:0 0 auto;height:760px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 65% 0,#6dcba40c,transparent 65%)}[hidden]{display:none!important}button,input,select{font:inherit}button,a,input,select,summary{outline-offset:5px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--mint)}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}a{color:var(--mint)}button{transition:background .18s,color .18s,border-color .18s}button,input,select{border-radius:5px}button{color:var(--ink)}.wrap{width:min(1260px,100%);margin:auto;padding:0 38px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:29px 0;border-bottom:1px solid var(--edge)}.brand{font-weight:800;letter-spacing:-.08em;font-size:32px;line-height:1}.brand span{color:var(--mint)}.header-right{display:flex;align-items:center;gap:18px}.status{font-size:12px;color:var(--dim);display:flex;align-items:center;gap:8px}.status:before{content:"";height:6px;width:6px;border-radius:50%;background:#7d918a}.status.connected:before{background:var(--mint);box-shadow:0 0 10px #89ebcb50}.quiet-button{border:1px solid var(--edge);background:transparent;padding:10px 15px;font-size:13px;font-weight:550}.quiet-button:hover{border-color:var(--mint);color:var(--mint)}.intro{padding:54px 0 42px;display:flex;justify-content:space-between;align-items:flex-end;gap:22px}.eyebrow{color:var(--mint);font:11px/1.5 var(--mono);letter-spacing:.16em;text-transform:uppercase}.intro h1{font-size:clamp(44px,6vw,76px);font-weight:600;letter-spacing:-.065em;line-height:1.04;margin:13px 0 16px}.intro p{font-size:16px;color:var(--dim);margin:0}.route{display:flex;align-items:center;gap:13px;color:var(--dim);font-size:12px;padding-bottom:5px;white-space:nowrap}.route i{display:block;width:32px;height:1px;background:linear-gradient(90deg,var(--edge),var(--mint));position:relative}.route i:after{content:"";height:4px;width:4px;border-radius:50%;position:absolute;right:0;top:-1.5px;background:var(--mint)}.route b{color:var(--mint);font-weight:500}.workspace{display:grid;grid-template-columns:300px minmax(0,1fr);gap:40px;align-items:start}.entry{border-top:1px solid var(--edge);padding-top:22px}h2{font-size:23px;font-weight:550;letter-spacing:-.035em;margin:0 0 8px}.entry>p{font-size:13px;color:var(--dim);margin:0 0 22px}.field{display:block;min-width:0}.field>span{display:block;margin:0 0 8px;color:#c0cdc8;font-size:13px;font-weight:550}input,select{background:#0d1313;color:var(--ink);border:1px solid var(--edge);padding:12px;width:100%;min-width:0}input::placeholder{color:#83968e}input:focus,select:focus{border-color:var(--mint)}.entry fieldset{border:0;margin:0;padding:0;display:grid;gap:18px;min-width:0}.entry .number-fields{display:grid;grid-template-columns:1fr 86px;gap:12px}#value{font-size:28px;height:62px;letter-spacing:-.03em}#unit{height:62px}.primary{border:1px solid var(--mint);background:var(--mint);color:#092319;font-weight:650;padding:13px 18px;width:100%;margin-top:2px}.primary:hover{background:#adf7df}.entry-note{font-size:12px;color:var(--dim);margin:14px 0 0}.message{font-size:13px;min-height:20px;margin:10px 0 0;color:var(--dim);overflow-wrap:anywhere}.message.error{color:var(--error)}.message.success{color:var(--mint)}.history{min-width:0}.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding:21px 0 16px;border-top:1px solid var(--edge)}.chart-head label{width:230px;max-width:55%;display:block}.chart-head select{font-size:14px;padding:8px 10px;cursor:pointer}.chart-head p{margin:4px 0 0;font-size:12px;color:var(--dim)}.chart-area{position:relative;min-height:297px;background:radial-gradient(ellipse at 50% 100%,#89ebcb09,transparent 74%)}.chart-empty{min-height:297px;display:grid;align-content:center;justify-items:center;text-align:center;padding:24px}.empty-mark{width:72px;height:72px;margin-bottom:16px}.chart-empty h3{font-size:20px;font-weight:500;letter-spacing:-.02em;margin:0 0 7px}.chart-empty p{font-size:14px;color:var(--dim);margin:0;max-width:310px}.latest{display:flex;align-items:baseline;gap:8px;padding:0 10px 0 0;overflow-wrap:anywhere}.latest strong{font-size:46px;font-weight:500;line-height:1.15;letter-spacing:-.055em;overflow-wrap:anywhere;min-width:0}.latest span{color:var(--dim);font-size:14px}.latest-time{font-size:12px;color:var(--dim);margin:7px 0 10px}.plot{display:block;width:100%;height:215px;overflow:visible;touch-action:pan-y}.plot text{font:10px var(--mono);fill:var(--dim)}.chart-caption{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--dim);margin:5px 0 17px}.record-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid var(--edge);padding:18px 0 13px}.record-heading h3{font-size:14px;font-weight:550;margin:0}.record-heading span{font-size:12px;color:var(--dim)}.records{max-height:265px;overflow:auto;overscroll-behavior:contain;padding-right:4px}.record{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:13px 0;border-top:1px solid #1b2824}.record-name{font-size:14px;margin:0 0 4px}.record small{font-size:11px;color:var(--dim);display:block;line-height:1.7}.record-value{font:500 20px/1.4 var(--sans);letter-spacing:-.02em;align-self:start;max-width:220px;overflow-wrap:anywhere;text-align:right}.record-value span{font-size:12px;color:var(--dim);margin-left:5px;letter-spacing:0}.record-empty{color:var(--dim);font-size:13px;margin:0;padding:12px 0}.footer{border-top:1px solid var(--edge);margin:42px 0 0;padding:22px 0 32px;display:flex;justify-content:space-between;gap:18px;color:var(--dim);font-size:12px}.footer b{font-weight:500;color:#d1dfd9}.footer a{color:var(--dim);text-decoration:none}.footer a:hover{color:var(--mint)}dialog{color:var(--ink);background:#101817;border:1px solid #344b40;border-radius:10px;width:min(490px,calc(100% - 28px));padding:28px;max-height:calc(100dvh - 36px);overflow:auto;box-shadow:0 30px 140px #0009}dialog::backdrop{background:#020605b8;backdrop-filter:blur(6px)}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:18px}.modal-head h2{font-size:27px}.close{border:0;background:transparent;color:var(--dim);font-size:26px;padding:0 6px}.modal-copy{color:var(--dim);font-size:14px;margin:8px 0 24px}#connect-form{display:grid;gap:16px}.project-fields{display:grid;gap:16px}details.project-settings{border-bottom:1px solid var(--edge);padding-bottom:16px}details.project-settings summary{font-size:13px;color:var(--blue);cursor:pointer;overflow-wrap:anywhere}details.project-settings .project-fields{padding-top:16px}.form-footnote{color:var(--dim);font-size:12px;line-height:1.6;margin:0}.auth-divider{height:1px;background:var(--edge);margin:4px 0}.auth-caption{font-size:12px;color:var(--dim);margin:0}noscript{display:block;padding:25px;background:#291c16;color:#ffd0b6}.plot .focus-ring{fill:none;stroke:var(--mint);stroke-opacity:.3;stroke-width:8}.plot:focus-visible{outline:1px solid var(--mint);outline-offset:3px}
+@media(max-width:800px){.wrap{padding:0 22px}.intro{padding:40px 0 32px}.route{display:none}.workspace{grid-template-columns:250px minmax(0,1fr);gap:24px}.chart-head{display:block}.chart-head label{margin-top:12px;width:100%;max-width:100%}.latest strong{font-size:36px}}
+@media(max-width:620px){.wrap{padding:0 20px}header{padding:22px 0}.header-right{gap:10px}.status{display:none}.intro{padding:34px 0 28px}.intro h1{font-size:52px}.intro p{font-size:15px}.workspace{grid-template-columns:1fr;gap:30px}.entry fieldset{grid-template-columns:1fr;gap:16px}.entry .number-fields{grid-column:1/-1;grid-row:2}.entry .primary{grid-column:1/-1}.entry>p{margin-bottom:18px}.entry .number-fields{grid-template-columns:minmax(0,1fr) 110px}.chart-head{display:flex}.chart-head label{margin:0;max-width:58%}.chart-area,.chart-empty{min-height:255px}.record-value{max-width:160px}.footer{margin-top:30px}.footer span{max-width:240px}dialog{padding:23px}.chart-caption{flex-wrap:wrap}.latest strong{font-size:40px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<noscript>This page needs JavaScript to connect to your database.</noscript>
+<div class="wrap">
+<header><div class="brand" aria-label="YOU">YOU<span>.</span></div><div class="header-right"><span class="status" id="connection-status">Not connected</span><button class="quiet-button" id="connect-open" type="button">Connect your Wire ↗</button><button class="quiet-button" id="sign-out" type="button" hidden>Sign out</button></div></header>
+<main>
+<section class="intro"><div><span class="eyebrow">The Wire / Your first page</span><h1>Start with one.</h1><p>Save what happened. See it over time.</p></div><div class="route" aria-label="You record a reading, then see its history">You<i aria-hidden="true"></i>Record<i aria-hidden="true"></i><b>History</b></div></section>
+<div class="workspace">
+<form class="entry" id="reading-form"><h2>Add a reading.</h2><p>One measurement. One moment.</p><fieldset id="reading-fields" disabled>
+<label class="field"><span>Measurement</span><input id="metric" list="metric-names" placeholder="Name your measurement" maxlength="80" required autocomplete="off"><datalist id="metric-names"></datalist></label>
+<div class="number-fields"><label class="field"><span>Value</span><input id="value" type="text" inputmode="decimal" placeholder="—" autocomplete="off" required maxlength="100"></label><label class="field"><span>Unit</span><input id="unit" placeholder="Unit" maxlength="32" required autocomplete="off"></label></div>
+<label class="field"><span>When it happened</span><input id="occurred" type="datetime-local" required></label>
+<button class="primary" id="save" type="submit">Save reading <span aria-hidden="true">↗</span></button>
+</fieldset><p class="entry-note" id="entry-note">Connect your database to save your first reading.</p><p class="message" id="save-message" role="status" aria-live="polite"></p></form>
+<section class="history" aria-labelledby="history-title"><div class="chart-head"><div><h2 id="history-title">Your history.</h2><p id="history-subtitle">Built from what you record.</p></div><label id="history-picker" hidden><span hidden>Measurement to display</span><select id="history-select" aria-label="Measurement to display"></select></label></div>
+<div class="chart-area"><div class="chart-empty" id="chart-empty"><svg class="empty-mark" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="31" fill="none" stroke="#294438" stroke-dasharray="2 6"/><circle cx="36" cy="36" r="12" fill="#89ebcb08" stroke="#466757"/><circle cx="36" cy="36" r="3" fill="#89ebcb"/></svg><h3 id="empty-title">Your first point starts here.</h3><p id="empty-copy">A real reading becomes a point on your graph. Nothing is filled in.</p></div><div id="chart-data" hidden><div class="latest"><strong id="point-value"></strong><span id="point-unit"></span></div><p class="latest-time" id="point-time"></p><svg id="plot" class="plot" viewBox="0 0 700 215" tabindex="0" role="img" aria-label="Recorded values over time. Use the left and right arrow keys to inspect readings."></svg><div class="chart-caption"><span>Recorded values · original units</span><span>Hover, tap or use ← →</span></div></div></div>
+<div class="record-heading"><h3>Saved readings</h3><span id="record-count">Your record stays here.</span></div><div class="records" id="records"><p class="record-empty">Connect to see your record.</p></div><p class="message" id="history-message" role="status" aria-live="polite"></p><button type="button" class="quiet-button" id="retry-read" hidden>Retry loading</button>
+</section>
+</div>
+</main>
+<footer class="footer"><span><b>Your database. Your record.</b> One reading at a time.</span><a href="https://github.com/RowanThistlebrooke/wire-starter" target="_blank" rel="noopener noreferrer">Episode 01 ↗</a></footer>
+</div>
+<dialog id="connection-dialog" aria-labelledby="connect-title"><div class="modal-head"><h2 id="connect-title">Connect your Wire.</h2><button class="close" id="connect-close" type="button" aria-label="Close connection settings">×</button></div><p class="modal-copy">Use the Supabase project and the login you just created.</p>
+<form id="connect-form">
+<details class="project-settings" id="project-settings" open><summary id="project-summary">Your database</summary><div class="project-fields"><label class="field"><span>Project URL</span><input id="project-url" type="url" placeholder="https://your-project.supabase.co" autocomplete="off" required></label><label class="field"><span>Publishable key</span><input id="project-key" type="text" placeholder="sb_publishable_…" autocomplete="off" spellcheck="false" required></label><p class="form-footnote">From your Supabase project’s Connect dialog. Use the publishable key; never a secret or service-role key.</p></div></details>
+<label class="field"><span>Email</span><input id="email" type="email" autocomplete="username" required></label><label class="field"><span>Wire password</span><input id="password" type="password" autocomplete="current-password" required></label><p class="auth-caption">The login from Authentication → Users.</p><button class="primary" id="connect-submit" type="submit">Connect & sign in ↗</button><p class="message" id="connect-message" role="status"></p><p class="form-footnote">The project settings stay in this browser. Your password is sent to your Supabase project and is never saved by this page.</p>
+</form></dialog>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+// One HTML page. Supabase stores the record; this browser only displays it.
+const $ = id => document.getElementById(id);
+const CONFIG_KEY = 'wire-starter.project.v1';
+const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slug = value => value.trim().toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
+const displayName = value => value.replace(/_/g,' ');
+const stamp = value => new Date(value).toLocaleString([], {month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+const seriesKey = row => JSON.stringify([row.metric,row.unit || '']);
+let client = null, authSubscription = null, user = null, rows = [], groups = new Map(), selected = '', generation = 0, request = 0, busy = false, pending = null, plotPoints = [], activePoint = -1;
+function message(id,text,kind=''){ $(id).textContent = text; $(id).className = 'message' + (kind ? ' '+kind : ''); }
+function localNow(){ const date = new Date(); return new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,16); }
+$('occurred').value = localNow();
+function projectConfig(){
+  const url = $('project-url').value.trim().replace(/\/$/,''), key = $('project-key').value.trim();
+  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)) throw new Error('Use your Supabase project URL: https://your-project.supabase.co');
+  if (!/^sb_publishable_[A-Za-z0-9_-]+$/.test(key)) throw new Error('Use a publishable key beginning sb_publishable_. Secret and service-role keys cannot go in this page.');
+  return {url,key};
+}
+function showConnection(){ $('connection-dialog').showModal(); if (!$('project-url').value) $('project-url').focus(); else $('email').focus(); }
+$('connect-open').onclick = showConnection;
+$('connect-close').onclick = () => $('connection-dialog').close();
+function resetView(){
+  rows=[]; groups=new Map(); selected=''; plotPoints=[]; activePoint=-1;
+  $('history-picker').hidden=true; $('chart-data').hidden=true; $('chart-empty').hidden=false;
+  $('empty-title').textContent='Your first point starts here.';
+  $('empty-copy').textContent='A real reading becomes a point on your graph. Nothing is filled in.';
+  $('records').innerHTML='<p class="record-empty">Connect to see your record.</p>';
+  $('record-count').textContent='Your record stays here.'; $('metric-names').innerHTML='';
+  $('history-subtitle').textContent='Built from what you record.'; $('retry-read').hidden=true;
+  message('history-message','');
+}
+function setUser(next){
+  if (next?.id === user?.id) return;
+  user=next; generation++; request++; pending=null; resetView();
+  $('reading-fields').disabled=!user; $('connect-open').hidden=!!user; $('sign-out').hidden=!user;
+  $('connection-status').textContent=user ? 'Connected to your database' : 'Not connected';
+  $('connection-status').classList.toggle('connected',!!user);
+  $('entry-note').textContent=user ? 'Saved to your database. New readings add to the record.' : 'Connect your database to save your first reading.';
+  message('save-message','');
+  if (!user){ $('value').value=''; $('unit').value=''; $('metric').value=''; }
+  else { $('occurred').value=localNow(); loadHistory(); }
+}
+function makeClient(config){
+  if (!window.supabase) throw new Error('The connection library could not load. Check your internet connection and reload.');
+  authSubscription?.unsubscribe(); client?.auth.stopAutoRefresh();
+  const storageKey='wire-starter.auth.'+new URL(config.url).hostname;
+  client=supabase.createClient(config.url,config.key,{auth:{storage:sessionStorage,storageKey,persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+  const thisClient=client;
+  authSubscription=client.auth.onAuthStateChange((_event,session) => {
+    // Keep the auth callback synchronous; defer database requests outside its lock.
+    setTimeout(() => { if (client===thisClient) setUser(session?.user || null); },0);
+  }).data.subscription;
+  return client;
+}
+$('connect-form').addEventListener('submit',async event => {
+  event.preventDefault(); if (busy) return;
+  let config; try { config=projectConfig(); } catch(error){ $('project-settings').open=true; message('connect-message',error.message,'error'); return; }
+  busy=true; $('connect-submit').disabled=true; message('connect-message','Signing in…');
+  try {
+    const db=makeClient(config);
+    const {data,error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
+    if (error) throw error;
+    if (!data.user) throw new Error('Sign-in did not return a user. Please try again.');
+    try { localStorage.setItem(CONFIG_KEY,JSON.stringify(config)); } catch {}
+    $('password').value=''; $('project-summary').textContent=new URL(config.url).hostname; $('project-settings').open=false;
+    setUser(data.user); $('connection-dialog').close(); message('connect-message','');
+  } catch(error){ message('connect-message',error.message || 'Could not sign in. Check the project and your Wire login.','error'); }
+  finally { busy=false; $('connect-submit').disabled=false; }
+});
+$('sign-out').onclick=async () => {
+  if (!client || busy) return;
+  busy=true; $('sign-out').disabled=true; $('reading-fields').disabled=true;
+  try {
+    const {error}=await client.auth.signOut({scope:'local'});
+    if(error) throw error;
+    setUser(null);
+  } catch(error){ message('save-message',error.message || 'Could not sign out. Please retry.','error'); }
+  finally { busy=false; $('sign-out').disabled=false; $('reading-fields').disabled=!user; }
+};
+// Read every page, even if the server caps a request below our requested size.
+// A failed page throws; partial history is never presented as complete.
+async function readAll(make){
+  const all=[]; let from=0;
+  for(;;){
+    const {data,error,count}=await make().range(from,from+999);
+    if(error) throw error;
+    if(!Array.isArray(data) || !Number.isSafeInteger(count) || count<0) throw new Error('The full history could not be confirmed. Please retry.');
+    all.push(...data); from+=data.length;
+    if(from>=count) return all;
+    if(!data.length) throw new Error('The history stopped before every reading was returned. Please retry.');
+  }
+}
+async function loadHistory(preferred=''){
+  if (!client || !user) return false;
+  const db=client, who=user.id, version=generation, thisRequest=++request;
+  message('history-message','Loading your record…'); $('retry-read').hidden=true;
+  try {
+    const result=await readAll(() => db.from('events').select('id,metric,value::text,unit,occurred_at,recorded_at,source',{count:'exact'})
+      .eq('user_id',who).eq('event_type','measurement').not('value','is',null)
+      .order('recorded_at',{ascending:true}).order('id',{ascending:true}));
+    if(version!==generation || thisRequest!==request) return false;
+    rows=result; groups=new Map();
+    for(const row of rows){ const key=seriesKey(row); if(!groups.has(key)) groups.set(key,[]); groups.get(key).push(row); }
+    for(const group of groups.values()) group.sort((a,b) => a.occurred_at.localeCompare(b.occurred_at) || a.id.localeCompare(b.id));
+    if(preferred && groups.has(preferred)) selected=preferred;
+    if(!groups.has(selected)) selected=rows.length ? seriesKey(rows.at(-1)) : '';
+    $('metric-names').innerHTML=[...new Set(rows.map(row=>row.metric))].sort().map(metric=>`<option value="${escapeHTML(metric)}"></option>`).join('');
+    $('history-select').innerHTML=[...groups].sort((a,b)=>a[1][0].metric.localeCompare(b[1][0].metric)).map(([key,group])=>`<option value="${escapeHTML(key)}"${key===selected?' selected':''}>${escapeHTML(displayName(group[0].metric))}${group[0].unit?' · '+escapeHTML(group[0].unit):' · no unit'}</option>`).join('');
+    $('history-picker').hidden=!groups.size; drawHistory(); message('history-message',''); return true;
+  } catch(error){
+    if(version!==generation || thisRequest!==request) return false;
+    rows=[]; groups=new Map(); plotPoints=[]; $('history-picker').hidden=true; $('chart-data').hidden=true; $('chart-empty').hidden=false;
+    $('empty-title').textContent='Your record could not load.'; $('empty-copy').textContent='Retry to read your saved history.';
+    $('records').innerHTML=''; $('record-count').textContent='History unavailable';
+    message('history-message',error.message || 'Could not load every reading.','error'); $('retry-read').hidden=false; return false;
+  }
+}
+$('retry-read').onclick=()=>loadHistory();
+$('history-select').onchange=event=>{selected=event.target.value;drawHistory();};
+function drawHistory(){
+  const group=groups.get(selected) || [];
+  $('chart-empty').hidden=!!group.length; $('chart-data').hidden=!group.length;
+  if(!group.length){ $('empty-title').textContent='Your first point starts here.'; $('empty-copy').textContent='A real reading becomes a point on your graph. Nothing is filled in.'; $('records').innerHTML='<p class="record-empty">Save a reading to begin.</p>'; $('record-count').textContent='No readings yet'; $('history-subtitle').textContent='Ready for your first reading.'; return; }
+  $('history-subtitle').textContent=displayName(group[0].metric);
+  $('record-count').textContent=group.length+' reading'+(group.length===1?'':'s');
+  $('records').innerHTML=[...group].reverse().map(row=>`<article class="record"><div><p class="record-name">${escapeHTML(displayName(row.metric))}</p><small>Read ${escapeHTML(stamp(row.occurred_at))}</small><small>Saved ${escapeHTML(stamp(row.recorded_at))} · ${escapeHTML(row.source)}</small></div><div class="record-value">${escapeHTML(row.value)}<span>${escapeHTML(row.unit)}</span></div></article>`).join('');
+  drawPlot(group);
+}
+// Compare decimal identities before converting them into chart coordinates.
+function decimalIdentity(value){
+  const match=String(value).trim().toLowerCase().match(/^([+-]?)(\d*)(?:\.(\d*))?(?:e([+-]?\d+))?$/);
+  if(!match || !(match[2] || match[3])) return null;
+  let digits=(match[2]+(match[3] || '')).replace(/^0+/,'');
+  if(!digits) return '0';
+  let exponent=Number(match[4] || 0)-(match[3] || '').length;
+  while(digits.endsWith('0')){ digits=digits.slice(0,-1); exponent++; }
+  return (match[1]==='-'?'-':'')+digits+'e'+exponent;
+}
+function drawPlot(group){
+  // Stored values stay exact strings. Never hide points that cannot be plotted.
+  const W=Math.max(280,$('plot').clientWidth || 700),H=215,L=14,R=14,T=28,B=33;
+  $('plot').setAttribute('viewBox',`0 0 ${W} ${H}`);
+  plotPoints=[]; activePoint=-1;
+  if(group.some(row=>!Number.isFinite(Number(row.value)) || !Number.isFinite(Date.parse(row.occurred_at)) || decimalIdentity(row.value)!==decimalIdentity(String(Number(row.value))))){
+    $('plot').innerHTML=`<text x="${W/2}" y="100" text-anchor="middle">This scale exceeds chart precision.</text><text x="${W/2}" y="120" text-anchor="middle">Exact saved values are listed below.</text>`;
+    showPoint(group.at(-1)); return;
+  }
+  const candidates=group; plotPoints=candidates; activePoint=candidates.length-1;
+  let minimum=candidates[0],maximum=minimum;
+  for(const row of candidates){ if(Number(row.value)<Number(minimum.value))minimum=row; if(Number(row.value)>Number(maximum.value))maximum=row; }
+  // Normalize first so even opposite, very large values have a finite range.
+  const magnitude=Math.max(Math.abs(Number(minimum.value)),Math.abs(Number(maximum.value))) || 1;
+  let low=Number(minimum.value)/magnitude,high=Number(maximum.value)/magnitude;
+  const span=high-low, padding=span ? span*.16 : .1;
+  low-=padding; high+=padding;
+  const from=Date.parse(candidates[0].occurred_at),to=Date.parse(candidates.at(-1).occurred_at);
+  const x=row=>from===to?W/2:L+(Date.parse(row.occurred_at)-from)/(to-from)*(W-L-R);
+  const y=row=>T+(high-Number(row.value)/magnitude)/(high-low)*(H-T-B);
+  let lines='',previous=null,hasGap=false;
+  for(const row of candidates){
+    row.plotX=x(row); row.plotY=y(row);
+    if(previous){
+      const gap=Date.parse(row.occurred_at)-Date.parse(previous.occurred_at)>86400000; hasGap ||= gap;
+      lines+=`<path d="M${previous.plotX} ${previous.plotY}L${row.plotX} ${row.plotY}" fill="none" stroke="${gap?'#7e9b90':'#89ebcb'}" stroke-width="2"${gap?' stroke-dasharray="4 6"':''}/>`;
+    }
+    previous=row;
+  }
+  const dateLabel=row=>new Date(row.occurred_at).toLocaleDateString([],{month:'short',day:'numeric'});
+  const axisLabel=row=>String(row.value).length<=12?row.value:Number(row.value).toExponential(3);
+  $('plot').innerHTML=`<line x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}" stroke="#263b31"/><line x1="${L}" x2="${W-R}" y1="${(H-B+T)/2}" y2="${(H-B+T)/2}" stroke="#1f3029" stroke-dasharray="2 7"/><text x="${L}" y="12">${escapeHTML(axisLabel(maximum))}${minimum!==maximum?' / '+escapeHTML(axisLabel(minimum))+' range':''}</text>${hasGap?`<text x="${W-R}" y="12" text-anchor="end">— — over 24h apart</text>`:''}${lines}${candidates.map((row,i)=>`<circle data-point="${i}" cx="${row.plotX}" cy="${row.plotY}" r="3.5" fill="#89ebcb"><title>${escapeHTML(row.value)} ${escapeHTML(row.unit)} · ${escapeHTML(stamp(row.occurred_at))}</title></circle>`).join('')}<text x="${L}" y="${H-6}">${escapeHTML(dateLabel(candidates[0]))}</text>${from!==to?`<text x="${W-R}" y="${H-6}" text-anchor="end">${escapeHTML(dateLabel(candidates.at(-1)))}</text>`:''}<g id="plot-focus"></g>`;
+  inspectPoint(activePoint);
+}
+let resizeFrame;
+new ResizeObserver(()=>{ cancelAnimationFrame(resizeFrame); resizeFrame=requestAnimationFrame(()=>{ const group=groups.get(selected); if(group?.length){ const previous=activePoint; drawPlot(group); inspectPoint(previous); } }); }).observe($('plot'));
+function showPoint(row){ $('point-value').textContent=row.value; $('point-unit').textContent=row.unit || ''; $('point-time').textContent='Read '+stamp(row.occurred_at); }
+function inspectPoint(index){
+  if(!plotPoints.length) return; activePoint=Math.max(0,Math.min(plotPoints.length-1,index)); const row=plotPoints[activePoint]; showPoint(row);
+  const focus=$('plot-focus'); if(focus) focus.innerHTML=`<circle class="focus-ring" cx="${row.plotX}" cy="${row.plotY}" r="5"/><circle cx="${row.plotX}" cy="${row.plotY}" r="3.5" fill="#b5fce3"/>`;
+}
+function inspectPointer(event){
+  if(!plotPoints.length) return; const matrix=$('plot').getScreenCTM(); if(!matrix)return;
+  const px=new DOMPoint(event.clientX,event.clientY).matrixTransform(matrix.inverse()).x;
+  let nearest=0;for(let i=1;i<plotPoints.length;i++) if(Math.abs(plotPoints[i].plotX-px)<Math.abs(plotPoints[nearest].plotX-px)) nearest=i;
+  inspectPoint(nearest);
+}
+$('plot').addEventListener('pointermove',inspectPointer);$('plot').addEventListener('pointerdown',inspectPointer);
+$('plot').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();inspectPoint(event.key==='Home'?0:event.key==='End'?plotPoints.length-1:activePoint+(event.key==='ArrowRight'?1:-1));});
+function readingDraft(){
+  const metric=slug($('metric').value),value=$('value').value.trim(),unit=$('unit').value.trim(),when=$('occurred').value;
+  if(!metric) throw new Error('Give this measurement a name.');
+  if(metric.endsWith('_est')) throw new Error('This page records measurements. Image estimates use a separate recording step.');
+  if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(value) || !Number.isFinite(Number(value))) throw new Error('Enter a number using a decimal point.');
+  if(!unit) throw new Error('Add a unit so readings stay comparable.');
+  const time=new Date(when); if(!when || !Number.isFinite(time.getTime())) throw new Error('Choose when this reading happened.');
+  if(time.getTime()>Date.now()+60000) throw new Error('Use the time this reading happened, rather than a future time.');
+  return {metric,value,unit,occurred_at:time.toISOString()};
+}
+$('reading-form').addEventListener('submit',async event=>{
+  event.preventDefault();if(!user || !client || busy)return;
+  let draft;try{draft=readingDraft();}catch(error){message('save-message',error.message,'error');return;}
+  const fingerprint=JSON.stringify(draft),who=user.id,version=generation,db=client;
+  if(!pending || pending.fingerprint!==fingerprint || pending.userId!==who) pending={fingerprint,userId:who,id:crypto.randomUUID()};
+  const sourceId=pending.id;
+  busy=true; $('reading-fields').disabled=true; $('sign-out').disabled=true; message('save-message','Saving…');
+  try{
+    const {error}=await db.from('events').insert({...draft,user_id:who,source:'pad',source_id:sourceId,event_type:'measurement'});
+    // On an uncertain network result the same draft keeps its UUID. Confirm a
+    // duplicate by reading that exact saved row; never turn a retry into a new reading.
+    if(error){
+      if(error.code!=='23505') throw error;
+      const {data,error:readError}=await db.from('events').select('id').eq('user_id',who).eq('source','pad').eq('source_id',sourceId).eq('metric',draft.metric).maybeSingle();
+      if(readError || !data) throw readError || error;
+    }
+    if(version!==generation)return;
+    pending=null; $('metric').value=draft.metric; $('value').value=''; $('occurred').value=localNow();
+    const loaded=await loadHistory(seriesKey(draft));
+    if(version===generation) message('save-message',loaded?'Saved. It’s in your record.':'Saved. History could not refresh; use Retry loading.','success');
+  }catch(error){if(version===generation)message('save-message',(error.message || 'Save could not be confirmed.')+' Retry the same reading to avoid a duplicate.','error');}
+  finally{busy=false;$('reading-fields').disabled=!user;$('sign-out').disabled=false;}
+});
+// Restore only public project settings and a session for this browser tab.
+(async()=>{
+  try{
+    const saved=JSON.parse(localStorage.getItem(CONFIG_KEY) || 'null');if(!saved)return;
+    $('project-url').value=saved.url || ''; $('project-key').value=saved.key || '';
+    const config=projectConfig(),db=makeClient(config);
+    $('project-summary').textContent=new URL(config.url).hostname;$('project-settings').open=false;
+    const {data,error}=await db.auth.getSession();if(error)throw error;
+    if(client===db)setUser(data.session?.user || null);
+  }catch{message('save-message','Reconnect your Wire to continue.');}
+})();
+</script>
+</body>
+</html>

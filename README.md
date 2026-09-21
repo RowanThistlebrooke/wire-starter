@@ -93,3 +93,66 @@ Keep row-level security enabled. Only a publishable key belongs in this page; ne
 Local preview (Node.js 22+): copy `.env.example` to `.env.local`, fill in the two public settings, then run `node --env-file=.env.local dev.js` and open `http://localhost:8797`. The preview serves the page and `/api/config`; an ordinary static file server cannot provide the connection settings. `.env.local` is ignored by Git.
 
 [Supabase private buckets](https://supabase.com/docs/guides/storage/buckets/fundamentals) · [Storage access policies](https://supabase.com/docs/guides/storage/security/access-control) · [Upload](https://supabase.com/docs/reference/javascript/file-buckets-upload) · [Private download](https://supabase.com/docs/reference/javascript/file-buckets-download) · [Public API keys](https://supabase.com/docs/guides/api/api-keys)
+
+## Talk to it
+
+Log readings by talking to Claude on your phone. Needs BODY deployed first (above).
+
+**Already have BODY from episode 1?** In Claude Code, on your own repo, paste this, then merge the pull request:
+
+```
+Copy api/mcp.mjs, mcp/, any package.json and vercel.json changes, and the README "Talk to it" section from https://github.com/RowanThistlebrooke/wire-starter into this repo, then create a pull request to main.
+```
+
+### 1. Make a token
+
+Mac, in Terminal:
+
+```
+openssl rand -hex 32
+```
+
+Windows, in PowerShell:
+
+```
+$b = New-Object byte[] 32; [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($b); ($b | % { $_.ToString('x2') }) -join ''
+```
+
+Copy the line it prints. Never share it.
+
+### 2. Add three settings in Vercel
+
+Your project → Settings → Environment Variables. Add these, then Redeploy:
+
+```
+WIRE_EMAIL
+```
+```
+WIRE_PASSWORD
+```
+```
+WIRE_TOKEN
+```
+
+Email and password are your BODY login. The token is from step 1.
+
+### 3. Connect Claude
+
+claude.ai → Settings → Connectors → Add custom connector. Name it BODY. URL:
+
+```
+https://YOUR-PAGE.vercel.app/api/mcp
+```
+
+Paste your token where it asks for it.
+
+### 4. Say it
+
+In the Claude app on your phone:
+
+```
+log my weight, 158
+```
+
+Claude shows the exact row it will save. Say yes. Open BODY: the new point is on the graph.
+

@@ -5,7 +5,7 @@ Log readings by talking to Claude on your phone. You need BODY deployed first: [
 **Already have BODY from episode 1?** In Claude Code, on your own repo, paste this, then merge the pull request:
 
 ```
-Copy api/mcp.mjs, the mcp folder, and any package.json and vercel.json changes from https://github.com/RowanThistlebrooke/wire-starter into this repo. Keep my index.html as it is. Then create a pull request to main.
+Copy api/mcp.mjs, api/photo, the mcp folder, and any package.json and vercel.json changes from https://github.com/RowanThistlebrooke/wire-starter into this repo. Keep my index.html as it is. Then create a pull request to main.
 ```
 
 ## 1. Make a token
@@ -75,3 +75,14 @@ estimate my body fat and muscle from this photo
 ```
 
 It saves a guess, marked as a guess, never next to your measured weight. Say yes.
+
+## 6. Send photos from your camera roll
+
+Add this Shortcut on your iPhone: [add photo](https://www.icloud.com/shortcuts/09a1d2f5360f4336aa85c9ff9b53bd1f)
+
+Open it and change two things:
+
+- `YOUR-URL` to your page (the part before .vercel.app)
+- `YOUR-TOKEN` to your token from step 1 (keep the word Bearer and the space in front)
+
+Then in Photos, pick a photo → Share → **add photo**. It shows up in BODY under Progress photos.

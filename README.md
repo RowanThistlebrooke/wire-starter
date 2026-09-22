@@ -94,4 +94,11 @@ Local preview (Node.js 22+): copy `.env.example` to `.env.local`, fill in the tw
 
 ## Talk to it
 
-Log readings by talking to Claude on your phone: [docs/02-talk-to-it.md](docs/02-talk-to-it.md).
+Log a set by talking to Claude on your phone. The door is `/api/mcp` ([api/mcp.mjs](api/mcp.mjs), tools in [mcp/server.mjs](mcp/server.mjs)). It reaches two tables, your workout **sessions** and the **sets** in them, and can do two things: **log_set** (exercise, weight, reps) and **recent_sets**. Nothing edits or deletes; the tables have no policy for either. Before any write it returns the exact rows, and it writes only when called again after your yes.
+
+1. Run [sql/workouts.sql](sql/workouts.sql) once in your Supabase project's SQL Editor.
+2. In Vercel, under Settings → Environment Variables, set `WIRE_EMAIL` and `WIRE_PASSWORD` (your login) and `WIRE_TOKEN` (a long random string you make, for example with `openssl rand -hex 32`), then redeploy. The token lives only there, never in the code.
+3. In claude.ai → Settings → Connectors → Add custom connector: name it **Workouts**, URL `https://YOUR-PAGE.vercel.app/api/mcp`, no sign-in, and a header `Authorization` with the value `Bearer ` followed by your token.
+4. On your phone: **"log bench press, 80 kg for 5"**. Claude shows the set, and the session it starts if you have not lifted in the last three hours, and saves only after you say yes. **"what did I lift this week"** reads your sets back.
+
+Every request must carry the token; without it, nothing gets in. The door signs in as you with the publishable key, so row-level security still applies.

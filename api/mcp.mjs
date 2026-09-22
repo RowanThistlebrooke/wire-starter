@@ -1,4 +1,4 @@
-// BODY over HTTP, for claude.ai and the phone.
+// Your workouts over HTTP, for claude.ai and the phone.
 //
 // The server and both tools live in mcp/server.mjs, once. This file reads
 // nothing, writes nothing and works nothing out; it only checks the token and
@@ -10,7 +10,7 @@
 // set, nothing gets in.
 
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import { bodyServer } from '../mcp/server.mjs';
+import { workoutServer } from '../mcp/server.mjs';
 import { allowed, fromHeader } from '../mcp/token.mjs';
 
 function refuse(res, status, message) {
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     return refuse(res, 405, 'method not allowed');
   }
 
-  const server = bodyServer();
+  const server = workoutServer();
   const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
   res.on('close', () => { transport.close(); server.close(); });
   try {
